@@ -5,8 +5,10 @@
     <meta charset="utf-8">
     <title>@yield('title')</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free HTML Templates" name="keywords">
-    <meta content="Free HTML Templates" name="description">
+    <meta content="Html CSS JS PHP Laravel" name="keywords">
+    <meta content="Hayata Destek Web Tasarım E-ticaret sitesi ödevi" name="description">
+	<meta name="author" content="https://github.com/Havvazeynep , havvazeynepakdemir@gmail.com">
+
 
     <!-- Favicon -->
     <link href="{{asset('/')}}assets/img/favicon.ico" rel="icon">
