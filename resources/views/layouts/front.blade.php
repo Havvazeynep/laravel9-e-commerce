@@ -5,13 +5,13 @@
     <meta charset="utf-8">
     <title>@yield('title')</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Html CSS JS PHP Laravel" name="keywords">
-    <meta content="Hayata Destek Web Tasarım E-ticaret sitesi ödevi" name="description">
+    <meta content="@yield('description')" name="description">
+    <meta content="@yield('keywords')" name="keywords">
 	<meta name="author" content="https://github.com/Havvazeynep , havvazeynepakdemir@gmail.com">
 
 
     <!-- Favicon -->
-    <link href="{{asset('/')}}assets/img/favicon.ico" rel="icon">
+    <link href="@yield('icon')" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -35,11 +35,10 @@
     @section('sidebar')
         @include('home.sidebar')
     @show
-    @section('slider')
-        
-    @show
     
+    @section('slider')
 
+    @show
 
     @yield('content')
     
@@ -65,6 +64,7 @@
 
     <!-- Template Javascript -->
     <script src="{{asset('/')}}assets/js/main.js"></script>
+    
 </body>
 
 </html>

@@ -2,26 +2,133 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categories;
+use App\Models\Comment;
+use App\Models\Faq;
+use App\Models\Message;
+use App\Models\Product;
+use App\Models\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
     public function index(){
-        return view('pages.index');
+        $sliderdata = Product::limit(4)->get();
+        $productlist1 = Product::limit(8)->get();
+        $setting = Setting::first();
+
+        return view('pages.index',[
+            'setting'=>$setting,
+            'sliderdata'=>$sliderdata,
+            'productlist1'=>$productlist1
+
+        ]);
     }
+    public static function mainCategoryList(){
+        return Categories::where('parent_id', '*' , 0)->with('children')->get();
+    }
+    public function about(){
+        $setting = Setting::first();
+        return view('pages.about',[
+            'setting'=>$setting
+        ]);
+    }
+    public function references(){
+        $setting = Setting::first();
+        return view('pages.references',[
+            'setting'=>$setting
+        ]);
+    }
+
     public function shop(){
-        return view('pages.shop');
+        $setting = Setting::first();
+        return view('pages.shop',[
+            'setting'=>$setting
+        ]);
     }
     public function cart(){
-        return view('pages.cart');
+        $setting = Setting::first();
+        return view('pages.cart',[
+            'setting'=>$setting
+        ]);
     }
     public function checkout(){
-        return view('pages.checkout');
+        $setting = Setting::first();
+        return view('pages.checkout',[
+            'setting'=>$setting
+        ]);
+    }
+    public function faq(){
+        $setting = Setting::first();
+        $datalist = Faq::all();
+        return view('pages.faq',[
+            'setting'=>$setting,
+            'datalist'=>$datalist
+        ]);
     }
     public function contact(){
-        return view('pages.contact');
+        $setting = Setting::first();
+        return view('pages.contact',[
+            'setting'=>$setting
+        ]);
     }
+
+    public function storemessage(Request $request){
+        //dd($request);
+        $data = new Message();
+        $data->name = $request->input('name');
+        $data->email = $request->input('email');
+        $data->phone = $request->input('phone');
+        $data->subject = $request->input('subject');
+        $data->message = $request->input('message');
+        $data->ip = request()->ip();
+        $data->save();
+
+        return redirect()->route('contact')->with('info','Your message has been sent, Thank You.');
+    }
+
+    public function storecomment(Request $request){
+        //dd($request);
+        $data = new Comment();
+        $data->user_id = Auth::id();
+        $data->product_id = $request->input('product_id');
+        $data->subject = $request->input('subject');
+        $data->review = $request->input('review');
+        $data->IP = request()->IP();
+        $data->rate = $request->input('rate');
+
+        $data->save();
+
+
+        return redirect()->route('product',['id'=>$request->input('product_id')])->with('success','Your comment has been sent, Thank You.');
+    }
+
     public function detail(){
-        return view('pages.detail');
+        $setting = Setting::first();
+        return view('pages.detail',[
+            'setting'=>$setting
+        ]);
+    }
+    public function product($id){
+        $data = Product::find($id);
+        $setting = Setting::first();
+        $images = DB::table('images')->where('product_id',$id)->get();
+        $reviews = Comment::where('product_id',$id)->where('status','True')->get();
+        return view('pages.product',[
+            'data'=>$data,
+            'images'=>$images,
+            'reviews'=>$reviews,
+            'setting'=>$setting
+        ]);
+    }
+    public function categoryproducts($id){
+        $category = Categories::find($id);
+        $products = DB::table('products')->where('category_id',$id)->get();
+        return view('home.categoryproducts',[
+            'category'=>$category,
+            'products'=>$products
+        ]);
     }
 }

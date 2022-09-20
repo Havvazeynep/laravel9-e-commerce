@@ -1,7 +1,5 @@
 @extends('layouts.adminbase')
-@section('title')
-    Admin Panel - Add Category
-@endsection
+@section('title','Add Category')
 @section('css')
     
 @endsection
@@ -17,8 +15,8 @@
         <small>it all starts here</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="{{route('admin')}}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="{{route('admin_category')}}">Category</a></li>
+        <li><a href="{{route('admin.index')}}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="{{route('admin.category.index')}}">Category</a></li>
         <li class="active">Add Category</li>
       </ol>
     </section>
@@ -31,9 +29,19 @@
               <h3 class="box-title">Category Elements</h3>
             </div><!-- /.box-header -->
             <!-- form start -->
-            <form role="form" method="post" action="{{route('admin_category_store')}}">
+            <form role="form" method="post" action="{{route('admin.category.store')}}" enctype="multipart/form-data">
                 @csrf
               <div class="box-body">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Parent Category</label>
+
+                  <select name="parent_id" class="form-control select2">
+                    <option value="0" selected="selected">Main Category</option>
+                    @foreach($data as $rs)
+                      <option value="{{ $rs->id }}"> {{\App\Http\Controllers\AdminPanel\CategoryController::getParentsTree($rs, $rs->title)}}</option>
+                    @endforeach
+                  </select>
+                </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">Title</label>
                   <input type="text" class="form-control" name="title" placeholder="Title">
@@ -48,7 +56,7 @@
                 </div>
                 <div class="form-group">
                   <label for="exampleInputFile">Image</label>
-                  <input type="file" id="exampleInputFile">
+                  <input type="file" class="custom-file-input" name="image">
                   <p class="help-block">Choose image file.</p>
                 </div>
                 <div class="form-group">
