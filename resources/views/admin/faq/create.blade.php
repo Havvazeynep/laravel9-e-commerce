@@ -1,5 +1,5 @@
 @extends('layouts.adminbase')
-@section('title','Add Product')
+@section('title','Add FAQ')
 @section('css')
 @endsection
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">

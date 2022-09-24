@@ -17,24 +17,54 @@ class HomeController extends Controller
     public function index(){
         $sliderdata = Product::limit(4)->get();
         $productlist1 = Product::limit(8)->get();
+        $categorylist = Categories::limit(8)->get();
+        $lastproducts = Product::orderBy('id','DESC')->limit(8)->get();
         $setting = Setting::first();
 
         return view('pages.index',[
             'setting'=>$setting,
             'sliderdata'=>$sliderdata,
-            'productlist1'=>$productlist1
+            'productlist1'=>$productlist1,
+            'categorylist'=>$categorylist,
+            'lastproducts'=>$lastproducts
+
 
         ]);
     }
-    public static function mainCategoryList(){
-        return Categories::where('parent_id', '*' , 0)->with('children')->get();
+
+    public function loginuser(){
+        $setting = Setting::first();
+        return view('pages.login',[
+            'setting'=>$setting
+        ]);
     }
+
+    public function registeruser(){
+        $setting = Setting::first();
+        return view('pages.register',[
+            'setting'=>$setting
+        ]);
+    }
+
+    public function logoutuser(Request $request){
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
+    }
+
+    public static function mainCategoryList(){
+        return Categories::where('parent_id', '=' , 0)->with('children')->get();
+    }
+
     public function about(){
         $setting = Setting::first();
         return view('pages.about',[
             'setting'=>$setting
         ]);
     }
+
+    
     public function references(){
         $setting = Setting::first();
         return view('pages.references',[
@@ -44,22 +74,28 @@ class HomeController extends Controller
 
     public function shop(){
         $setting = Setting::first();
+        $products = Product::all();
         return view('pages.shop',[
-            'setting'=>$setting
+            'setting'=>$setting,
+            'products'=>$products
+
         ]);
     }
+
     public function cart(){
         $setting = Setting::first();
         return view('pages.cart',[
             'setting'=>$setting
         ]);
     }
+
     public function checkout(){
         $setting = Setting::first();
         return view('pages.checkout',[
             'setting'=>$setting
         ]);
     }
+
     public function faq(){
         $setting = Setting::first();
         $datalist = Faq::all();
@@ -68,6 +104,7 @@ class HomeController extends Controller
             'datalist'=>$datalist
         ]);
     }
+
     public function contact(){
         $setting = Setting::first();
         return view('pages.contact',[
@@ -125,10 +162,40 @@ class HomeController extends Controller
     }
     public function categoryproducts($id){
         $category = Categories::find($id);
-        $products = DB::table('products')->where('category_id',$id)->get();
+        $products = Product::where('category_id',$id)->get();
         return view('home.categoryproducts',[
             'category'=>$category,
             'products'=>$products
         ]);
     }
+
+    /**
+     * Handle an authentication attempt.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function loginadmincheck(Request $request){
+        if ($request->isMethod('post')){
+            $credentials = $request->validate([
+                'email' => ['required', 'email'],
+                'password' => ['required'],
+            ]);
+        
+            if (Auth::attempt($credentials)) {
+                $request->session()->regenerate();
+    
+                return redirect()->intended('admin');
+            }
+    
+            return back()->withErrors([
+                'email' => 'The provided credentials do not match our records.',
+            ])->onlyInput('email');
+        }
+        else{
+            return view('login');
+        }
+    }
+       
+
 }

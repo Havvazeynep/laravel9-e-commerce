@@ -33,28 +33,20 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto py-0">
-                        <a href="{{route('index')}}" class="nav-item nav-link active">Home</a>
-                        <a href="{{route('shop')}}" class="nav-item nav-link">Shop</a>
-                        <a href="{{route('detail')}}" class="nav-item nav-link">Shop Detail</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-angle-down mt-1"></i></a>
-                            <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                <a href="{{route('cart')}}" class="dropdown-item">Shopping Cart</a>
-                                <a href="{{route('checkout')}}" class="dropdown-item">Checkout</a>
-                            </div>
-                        </div>
-                        <a href="{{route('about')}}" class="nav-item nav-link">About</a>
-                        <a href="{{route('references')}}" class="nav-item nav-link">References</a>
-                        <a href="{{route('contact')}}" class="nav-item nav-link">Contact</a>
+                        <a href="{{route('index')}}" class="nav-item nav-link {{ Route::is('index') ? 'active' : '' }}">Home</a>
+                        <a href="{{route('shop')}}" class="nav-item nav-link {{ Route::is('shop') ? 'active' : '' }}">Shop</a>
+                        <a href="{{route('about')}}" class="nav-item nav-link {{ Route::is('about') ? 'active' : '' }}">About</a>
+                        <a href="{{route('references')}}" class="nav-item nav-link {{ Route::is('references') ? 'active' : '' }}">References</a>
+                        <a href="{{route('contact')}}" class="nav-item nav-link {{ Route::is('contact') ? 'active' : '' }}">Contact</a>
                     </div>
                     <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                         <a href="" class="btn px-0">
                             <i class="fas fa-heart text-primary"></i>
-                            <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
+                            <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;"></span>
                         </a>
-                        <a href="" class="btn px-0 ml-3">
+                        <a href="{{route('shopcart.index')}}" class="btn px-0 ml-3">
                             <i class="fas fa-shopping-cart text-primary"></i>
-                            <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
+                            <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">{{\App\Http\Controllers\ShopCartController::countshopcart()}}</span>
                         </a>
                     </div>
                 </div>

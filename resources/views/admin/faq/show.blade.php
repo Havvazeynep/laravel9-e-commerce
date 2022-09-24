@@ -1,5 +1,5 @@
 @extends('layouts.adminbase')
-@section('title', 'Show Product :'.$data->title)
+@section('title', 'Show FAQ :'.$data->title)
 @section('css')
     
 @endsection
