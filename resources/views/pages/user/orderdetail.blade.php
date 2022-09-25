@@ -11,6 +11,7 @@
         <div class="col-12">
             <nav class="breadcrumb bg-light mb-30">
                 <a class="breadcrumb-item text-dark" href="{{route('index')}}">Home</a>
+                <a class="breadcrumb-item text-dark" href="{{route('userpanel.orders')}}">Orders</a>
                 <span class="breadcrumb-item active">User Order Detail</span>
             </nav>
         </div>

@@ -62,3 +62,33 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+## Mac için composer kurulumu ve projeyi başlatma adımları
+
+-Eğer bilgisayarda homebrew kuruluysa = brew install composer
+
+-Başka yoldan kurulum sırayla terminale aşağıdakileri yazıyoruz
+1-Composer indirmek için => php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+
+2-Kurulum için => php composer-setup.php
+
+3-İnen dosyayı silmek için => php -r "unlink('composer-setup.php');"
+    
+-kurulum local olarak kuruldu bunu global yapmak için
+
+4-mv composer.phar /usr/local/bin/composer
+
+-eğer böyle bir dosyanız yoksa bu adımda 
+    mv: rename composer.phar to /usr/local/bin/composer: No such file or directory
+bu şekilde hata alabilirsiniz
+    sudo mkdir -p /usr/local/bin
+bu şekilde yeni bir dizin oluşturup tekrardan kurabilirsiniz
+    mv composer.phar /usr/local/bin/composer
+
+-veritabanına bilgilerin kaydı için php artisan migrate yazarak tabloları veritabanında oluşturabiliriz
+Ama bunu yapmadan önce env. dosyasına giderek kendi veritabanı ayarlarınızı girmelisiniz
+eğer hata alıyorsanız config->database.php içine girerek charset ayarlarınızı veritabanındaki charset ayarlarıyla uyumlu hale getiriniz.Yani 55 ve 56. satırları düzenleyiniz.
+
+-Kurulum başarılıysa terminale php artisan serve yazarak projeyi çalıştırabilirsiniz
+     

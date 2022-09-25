@@ -120,7 +120,7 @@
                     </div>
                     <small class="pt-1">({{$data->comment->count('id')}}/{{number_format($average,1)}} Reviews)</small>
                 </div>
-                <h3 class="font-weight-semi-bold mb-4">{{$data->price}}</h3>
+                <h3 class="font-weight-semi-bold mb-4">${{$data->price}}</h3>
                 <p class="mb-4">{{$data->description}}</p>
                 
                 <div class="d-flex align-items-center mb-4 pt-2">
@@ -174,10 +174,10 @@
                     <div class="tab-pane fade" id="tab-pane-3">
                         <div class="row">
                             <div class="col-md-6">
-                                <h4 class="mb-4">1 review for {{$data->title}}</h4>
+                                <h4 class="mb-4">{{$data->comment->count('id')}} review for {{$data->title}}</h4>
                                 @foreach($reviews as $rs)
                                 <div class="media mb-4">
-                                    <img src="{{asset('/')}}assets/img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
+                                    <img src="{{asset('/')}}assets/img/profil-picture.jpg" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
                                     <div class="media-body">
                                         <h6>{{$rs->user->name}}<small> - <i>{{$rs->created_at}}</i></small></h6>
                                         <div class="text-primary mb-2">

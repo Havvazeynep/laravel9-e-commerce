@@ -32,6 +32,19 @@ class HomeController extends Controller
         ]);
     }
 
+    public function search(Request $request){
+       
+        $search = $request->input('search');
+  
+        $posts = Product::query()
+                    ->where('title', 'LIKE', "%{$search}%")
+                    ->orWhere('keywords', 'LIKE', "%{$search}%")
+                    ->orWhere('description', 'LIKE', "%{$search}%")
+                    ->get();
+        
+        return view('pages.search', compact('posts'));
+    }
+
     public function loginuser(){
         $setting = Setting::first();
         return view('pages.login',[
@@ -98,7 +111,7 @@ class HomeController extends Controller
 
     public function faq(){
         $setting = Setting::first();
-        $datalist = Faq::all();
+        $datalist = Faq::where('status','True')->get();
         return view('pages.faq',[
             'setting'=>$setting,
             'datalist'=>$datalist

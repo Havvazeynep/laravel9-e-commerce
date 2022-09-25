@@ -33,11 +33,11 @@
               <div class="box-body">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Question</label>
-                  <input type="text" class="form-control" name="question" placeholder="Question">
+                  <input type="text" class="form-control" name="question" placeholder="Question" required>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">Answer</label>
-                  <textarea name="answer" id="answer" class="form-control"></textarea>
+                  <textarea name="answer" id="answer" class="form-control" required></textarea>
                 </div>
                 <div class="form-group">
                     <label>Select</label>

@@ -84,7 +84,7 @@
                 <div class="text-center py-4">
                     <a class="h6 text-decoration-none text-truncate" href="{{route('product',['id'=>$rs->id])}}">{{$rs->title}}</a>
                     <div class="d-flex align-items-center justify-content-center mt-2">
-                        <h5>${{$rs->price}}</h5><h6 class="text-muted ml-2"><del>${{$rs->price}}</del></h6>
+                        <h5>${{$rs->price}}</h5>
                     </div>
                     @php
                         $average = $rs->comment->average('rate')
@@ -147,7 +147,7 @@
                 <div class="text-center py-4">
                     <a class="h6 text-decoration-none text-truncate" href="{{route('product',['id'=>$rs->id])}}">{{$rs->title}}</a>
                     <div class="d-flex align-items-center justify-content-center mt-2">
-                        <h5>${{$rs->price}}</h5><h6 class="text-muted ml-2"><del>${{$rs->price}}</del></h6>
+                        <h5>${{$rs->price}}</h5>
                     </div>
                     @php
                         $average = $rs->comment->average('rate')

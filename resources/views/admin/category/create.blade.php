@@ -44,24 +44,24 @@
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">Title</label>
-                  <input type="text" class="form-control" name="title" placeholder="Title">
+                  <input type="text" class="form-control" name="title" placeholder="Title" required>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Keywords</label>
-                    <input type="text" class="form-control" name="keywords" placeholder="Keywords">
+                    <input type="text" class="form-control" name="keywords" placeholder="Keywords" required>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Description</label>
-                    <input type="text" class="form-control" name="description" placeholder="Description">
+                    <input type="text" class="form-control" name="description" placeholder="Description" required>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputFile">Image</label>
-                  <input type="file" class="custom-file-input" name="image">
+                  <input type="file" class="custom-file-input" name="image" required>
                   <p class="help-block">Choose image file.</p>
                 </div>
                 <div class="form-group">
                     <label>Select</label>
-                    <select class="form-control" name="status">
+                    <select class="form-control" name="status" required>
                       <option>True</option>
                       <option>False</option>
                     </select>

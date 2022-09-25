@@ -41,6 +41,8 @@ Route::post('/storecomment',[HomeController::class,'storecomment'])->name('store
 Route::get('/detail',[HomeController::class,'detail'])->name('detail');
 Route::get('/product/{id}',[HomeController::class,'product'])->name('product');
 Route::get('/categoryproducts/{id}/{slug}',[HomeController::class,'categoryproducts'])->name('categoryproducts');
+Route::get('/search',[HomeController::class,'search'])->name('search');
+
 
 Route::get('/loginuser',[HomeController::class,'loginuser'])->name('loginuser');
 Route::get('/registeruser',[HomeController::class,'registeruser'])->name('registeruser');

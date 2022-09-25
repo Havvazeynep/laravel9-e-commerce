@@ -58,7 +58,10 @@ class FaqController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Faq::find($id);
+        return view('admin.faq.show',[
+            'data' => $data
+        ]);
     }
 
     /**
